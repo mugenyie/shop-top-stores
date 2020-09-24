@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "945875455862",
+    "firebase_url": "https://shop-top-stores-sts.firebaseio.com",
+    "project_id": "shop-top-stores-sts",
+    "storage_bucket": "shop-top-stores-sts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945875455862:android:fe0363b2f499063608f457",
+        "android_client_info": {
+          "package_name": "com.shoptopstores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945875455862-j9upcdmfelmlngjhjr2ldr2i4vqd868n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZEKErOxKyOsFk-Ul9A0GM3gJRo5EPEos"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945875455862-j9upcdmfelmlngjhjr2ldr2i4vqd868n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
