@@ -1,10 +1,23 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import {Item, Input, Button, Label, Textarea, Picker} from 'native-base';
+import {PayWithFlutterwave} from 'flutterwave-react-native';
 import mainStyles from '../../shared/mainStyles';
 import {storeData, getData, USER_PROFILE} from '../Settings/PersistUserData';
 import { ScrollView } from 'react-native-gesture-handler';
 import PaymentModel from '../../components/PaymentModel';
+import Icon from 'react-native-vector-icons/Feather';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+  }
 
 function truncateString(str, num) {
     if (str.length <= num) {
@@ -52,7 +65,7 @@ class OrderStatus extends Component {
     }
     
     render() {
-        const { order, total, cartItems } = this.state;
+        const { order, total, cartItems, userObject } = this.state;
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
                 <View style={{flexDirection:'row',justifyContent:'space-between',paddingBottom:10}}>
@@ -83,7 +96,38 @@ class OrderStatus extends Component {
                     ))
                 }
                 {
-                    order.orderStatus == 1 && <PaymentModel order={order} user={this.state.userObject} amount={total} currency={order.currency} />
+                    order.orderStatus == 1 && (
+                        <PayWithFlutterwave
+                        onComplete={() => alert("Transaction success")}
+                        onAbort={() => alert("Transaction aborted")}
+                        onRedirect={() => {}}
+                        options={{
+                            tx_ref: uuidv4(),
+                            authorization: 'FLWSECK-d3c1911720d2144c52ceec7357ddf6c5-X',
+                            customer: {
+                            email: userObject.email,
+                            phone: userObject.phone
+                            },
+                            meta: {
+                                orderId: order.orderId
+                            },
+                            amount: total,
+                            currency: order.currency,
+                            payment_options: 'card'
+                        }}
+                        customButton={(props) => (
+                            <Button
+                            disabled={props.disabled}
+                            style={{backgroundColor:"#212121",marginTop:height*0.04}}
+                            onPress={props.onPress}
+                            block
+                            >
+                                <Text style={[{color:'#fff',paddingRight:10},mainStyles.ButtonTitle]}>Pay {order.currency} {total}</Text>
+                                <Icon name="credit-card" size={22} color="#fff" />
+                            </Button>
+                        )}
+                        />
+                    )
                 }
             </ScrollView>
         );

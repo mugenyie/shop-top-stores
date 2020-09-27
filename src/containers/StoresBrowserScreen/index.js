@@ -24,9 +24,9 @@ const retailStores = [
     },
     {
         "id":4,
-        "name":"eBay",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/04222819/ebay.png",
-        "url": "https://www.ebay.com"
+        "name":"accessorize",
+        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/27103310/accesorize.png",
+        "url": "https://www.accessorize.com/uk/"
     },
     {
         "id":6,

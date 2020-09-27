@@ -345,7 +345,7 @@ function CustomDrawerContent(props) {
         <ShareButton />
       </View>
       <View style={{paddingLeft:20}}>
-        <Text style={[mainStyles.TextRegular]}>V 1.3.3</Text>
+        <Text style={[mainStyles.TextRegular]}>V 1.3.4</Text>
       </View>
     </View>
   );
@@ -437,9 +437,9 @@ const styles = StyleSheet.create({
 });
 
 export default function App() {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, [])
+  // useEffect(() => {
+  //   SplashScreen.hide();
+  // }, [])
   return (
     <Provider store={store}>
       <StatusBar hidden={false} barStyle="light-content" backgroundColor="#050505" />
