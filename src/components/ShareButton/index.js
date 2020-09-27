@@ -13,7 +13,7 @@ class ShareButton extends Component {
         try {
           const result = await Share.share({
               title:'Download SHOP TOP STORES (STS)',
-              message:`Enjoy the best global shopping experience with SHOP TOP STORES (STS) available on iOS and Android\niOS: ${iosLink}\nAndroid: ${androidLink}`,
+              message:`Enjoy the best global shopping experience from top stores across the globe with SHOP TOP STORES. Download now 👇\niOS: ${iosLink}\nAndroid: ${androidLink}`,
           });
     
           if (result.action === Share.sharedAction) {

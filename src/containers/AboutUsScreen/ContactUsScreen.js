@@ -11,12 +11,12 @@ const height = Dimensions.get('window').height;
 // create a component
 class ContactUsScreen extends Component {
     _pressCall=()=>{
-        const url='tel://+256705122812'
+        const url='tel://+256393193470'
         Linking.openURL(url)
     }
 
     _pressWhatsApp=()=>{
-        const url='https://wa.me/256705122812'
+        const url='https://wa.me/256393193470'
         Linking.openURL(url)
     }
 
@@ -43,7 +43,7 @@ class ContactUsScreen extends Component {
                             <Icon size={20} name="phone" />
                         </View>
                         <TouchableOpacity onPress={() => this._pressCall()} style={[{flex:0.8}]}>
-                            <Text style={mainStyles.ButtonTitle}>(+256) 705 122812</Text>
+                            <Text style={mainStyles.ButtonTitle}>(+256) 393 193470</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -52,7 +52,7 @@ class ContactUsScreen extends Component {
                             <FontAwesome size={20} name="whatsapp" />
                         </View>
                         <TouchableOpacity onPress={() => this._pressWhatsApp()} style={[{flex:0.8}]}>
-                            <Text style={mainStyles.ButtonTitle}>(+256) 705 122812</Text>
+                            <Text style={mainStyles.ButtonTitle}>(+256) 393 193470</Text>
                         </TouchableOpacity>
                     </View>
 
