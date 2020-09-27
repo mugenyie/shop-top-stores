@@ -31,7 +31,7 @@ class LaunchScreen extends Component {
             <View style={styles.container}>
                 <Animatable.Image
                 style={{width:width*0.5}}
-                resizeMode="center"
+                resizeMode="contain"
                 source={LaunchLogo}
                 animation="pulse" easing="ease-out" iterationCount="infinite">
                 </Animatable.Image>

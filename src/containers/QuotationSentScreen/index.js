@@ -14,7 +14,7 @@ class QuotationSentScreen extends Component {
         return (
             <View style={styles.container}>
                 <Icon name="check-circle" size={50} color="green"/>
-                <Text style={[{textAlign:'center',padding:10},mainStyles.TextRegular]}>Order Received {"\n"}Our on-line retail expert will call you shortly to confirm your order.</Text>
+        <Text style={[{textAlign:'center',padding:10},mainStyles.TextRegular]}>Your order has been received and is being processed{"\n"}Check your orders to confirm when it is done processing and ready for payment.</Text>
                 <Button
                     style={{backgroundColor:"#212121",marginTop:50,width:width*0.8,alignSelf:'center'}}
                     onPress={() => this.props.navigation.navigate("Orders")}

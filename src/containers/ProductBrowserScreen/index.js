@@ -106,7 +106,7 @@ class ProductBrowserScreen extends Component {
             </TouchableOpacity>
           </View>
           <Button
-          style={[{backgroundColor:'#D2232A',marginTop:height*0.02,borderRadius:0}, Platform.OS == "ios" ? {height:height*0.1}:{}]}
+          style={[{backgroundColor:'#D2232A',marginTop:height*0.02,borderRadius:0}, Platform.OS == "ios" ? {height:height*0.08}:{}]}
           onPress={() => {
             this.props.addItemToCart({
               id: currentUrl,
