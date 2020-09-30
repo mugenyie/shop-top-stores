@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {storeData, getData, clear, USER_PROFILE} from './PersistUserData';
+import {storeData, getData, clear, USER_PROFILE, FCM_TOKEN} from './PersistUserData';
 import { View, Text, StyleSheet, Dimensions,ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import {Item, Input, Button, Label, Textarea} from 'native-base';
 import Icon from 'react-native-vector-icons/Feather';
@@ -47,6 +47,7 @@ class UserProfileSettings extends Component {
         userId:"",
         fullName: "",
         phone: "",
+        firebaseToken: "",
         email: "",
         password: "",
         shippingCountry: "",
@@ -68,6 +69,11 @@ class UserProfileSettings extends Component {
       })
     })
     .catch(error => console.log(error))
+
+    getData(FCM_TOKEN)
+    .then(data => {
+      this.setState({firebaseToken:data})
+    }).catch(error => console.log(error))
   }
 
   saveUserData = (stateData) => {

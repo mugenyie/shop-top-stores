@@ -1,19 +1,23 @@
 import React, {Fragment, useEffect, Component} from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import {TouchableOpacity, Image, StyleSheet, View, Platform, StatusBar, Dimensions} from 'react-native';
+import {TouchableOpacity, Image, StyleSheet, View, Platform, StatusBar, Dimensions, Alert} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import SplashScreen from 'react-native-splash-screen';
+
+import firebase from "@react-native-firebase/app";
+import messaging from '@react-native-firebase/messaging';
+
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Badge, Text, Button} from 'native-base';
 import mainStyles from './src/shared/mainStyles';
 import {ShoppinReducer} from './src/redux/reducer';
 import CartIconTotal from './src/components/CartIconTotal';
-import {storeData, getData, USER_PROFILE} from './src/containers/Settings/PersistUserData';
+import {storeData, getData, USER_PROFILE, FCM_TOKEN} from './src/containers/Settings/PersistUserData';
 import ShareButton from './src/components/ShareButton';
 // screens
 import LaunchScreen from './src/containers/LaunchScreen';
@@ -345,7 +349,7 @@ function CustomDrawerContent(props) {
         <ShareButton />
       </View>
       <View style={{paddingLeft:20}}>
-        <Text style={[mainStyles.TextRegular]}>V 1.3.4</Text>
+        <Text style={[mainStyles.TextRegular]}>V 1.3.5</Text>
       </View>
     </View>
   );
@@ -436,10 +440,39 @@ const styles = StyleSheet.create({
   },
 });
 
+
+const requestUserPermission = async () => {
+  const authStatus = await messaging().requestPermission();
+  const enabled =
+    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+  if (enabled) {
+    getFcmToken() //<---- Add this
+    console.log('Authorization status:', authStatus);
+  }
+}
+
+const getFcmToken = async () => {
+  const fcmToken = await messaging().getToken();
+  if (fcmToken) {
+    await storeData(FCM_TOKEN, fcmToken);
+    console.log("Your Firebase Token is:", fcmToken);
+  } else {
+   console.log("Failed", "No token received");
+  }
+}
+
 export default function App() {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, [])
+  useEffect(() => {
+    SplashScreen.hide();
+    requestUserPermission();
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert(remoteMessage.notification.title, remoteMessage.notification.body);
+    });
+
+    return unsubscribe;
+  }, [])
   return (
     <Provider store={store}>
       <StatusBar hidden={false} barStyle="light-content" backgroundColor="#050505" />

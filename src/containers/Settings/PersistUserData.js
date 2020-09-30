@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const USER_PROFILE = "user_profile_key";
+export const FCM_TOKEN = "fcm_token";
 
 export const storeData = async (key, value) => {
     try {
