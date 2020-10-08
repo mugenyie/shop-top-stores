@@ -134,8 +134,8 @@ android {
         applicationId "com.shoptopstores"
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.3.5"
+        versionCode 9
+        versionName "1.3.6"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {

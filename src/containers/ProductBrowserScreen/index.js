@@ -89,10 +89,10 @@ class ProductBrowserScreen extends Component {
           )}
         </View>
         <View style={styles.viewAddToCart}>
-          <Text style={[mainStyles.TextRegular,{color:'#fff',textAlign:'center',paddingLeft:2,paddingRight:2,fontSize:12}]}>
+          <Text style={[mainStyles.TextRegular,{color:'#fff',textAlign:'center',paddingLeft:2,paddingRight:2}]}>
           <Text style={{fontWeight:"bold",textDecorationStyle:'solid',textDecorationLine:'underline',textTransform:'uppercase'}}>Instructions{"\n"}
           </Text> click <Text style={{fontWeight:"bold"}}>"ADD TO CART"</Text> below once you identify your desired item.
-          <Text>{"\n"}Do not accept/click "signup" or "download app" prompts while on this page.</Text>
+          {/* <Text>{"\n"}Do not accept/click "signup" or "download app" prompts while on this page.</Text> */}
           </Text>
           <View style={{flexDirection:'row',marginTop:height*0.015}}>
             <TouchableOpacity 

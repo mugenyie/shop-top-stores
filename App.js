@@ -349,7 +349,7 @@ function CustomDrawerContent(props) {
         <ShareButton />
       </View>
       <View style={{paddingLeft:20}}>
-        <Text style={[mainStyles.TextRegular]}>V 1.3.5</Text>
+        <Text style={[mainStyles.TextRegular]}>V 1.3.6</Text>
       </View>
     </View>
   );
