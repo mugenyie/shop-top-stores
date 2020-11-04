@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {addToCart} from '../../redux/actions';
 import { View, StyleSheet, Text, ActivityIndicator, Dimensions, TouchableOpacity, Platform } from 'react-native';
 import { WebView } from 'react-native-webview';
+import {captureScreen} from 'react-native-view-shot';
 import Icon from 'react-native-vector-icons/Feather';
 import {Button} from 'native-base';
 import CartIconTotal from '../../components/CartIconTotal';
@@ -36,10 +37,24 @@ class ProductBrowserScreen extends Component {
     this.state = {
       currentUrl: "",
       visible: true,
+      screenShot: "#",
       currentBrowserHtmlSource: "",
       storeUrl: isValidURL(props.route.params.storeUrl) ? withHttps(props.route.params.storeUrl) : `https://www.google.com/search?q=${props.route.params.storeUrl}`
     };
   }
+
+  takeScreenShot() {
+    captureScreen({
+      format: 'jpg',
+      quality: 0.9, 
+    }).then(
+      (uri) => {
+        this.setState({screenShot:uri})
+        console.log(`Image url: ${uri}`)
+      },
+      (error) => console.error('Oops, Something Went Wrong', error),
+    );
+  };
 
   hideSpinner() {
     this.setState({ visible: false });
@@ -109,13 +124,14 @@ class ProductBrowserScreen extends Component {
           </View>
           <Button
           style={[{backgroundColor:'#D2232A',marginTop:height*0.02,borderRadius:0}, Platform.OS == "ios" ? {height:height*0.08}:{}]}
-          onPress={() => {
-            this.props.addItemToCart({
-              id: currentUrl,
-              name: currentBrowserHtmlSource
-            });
-            this.props.navigation.navigate("ShoppingCart");
-          }}
+          // onPress={() => {
+          //   this.props.addItemToCart({
+          //     id: currentUrl,
+          //     name: currentBrowserHtmlSource
+          //   });
+          //   this.props.navigation.navigate("ShoppingCart");
+          // }}
+          onPress={this.takeScreenShot}
           block
           >
             <Text style={[mainStyles.ButtonTitle,{color:'#fff'}]}>
