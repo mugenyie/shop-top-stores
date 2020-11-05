@@ -16,7 +16,7 @@ class StoresList extends Component {
             >
                 <Image 
                 resizeMode="contain"
-                style={styles.image}
+                style={styles.imageContainer}
                 source={{uri:item.logo}}
                 />
             </TouchableOpacity>
@@ -27,12 +27,11 @@ class StoresList extends Component {
         const {data} = this.props;
         return (
             <FlatList
-            showsVerticalScrollIndicator={false}
-            numColumns={2}
+            horizontal
+            showsHorizontalScrollIndicator={false}
             data={data}
             renderItem = {({item}) => this._renderItem(item)}
             keyExtractor={(item) => item.id.toString()}
-            contentContainerStyle={{flex:1}}
             />
         );
     }
@@ -40,16 +39,12 @@ class StoresList extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-    image: {
-        width:width*0.48,
-        height:height*0.18,
-        flexDirection: 'column',
-        borderRadius: height*0.008,
-        margin:width*0.01,
-    },
     imageContainer: {
-    },
-    storeBackgroundImage: {
+        width:width*0.4,
+        height:140,
+        marginRight:10,
+        marginLeft:10, 
+        borderRadius: 4
     }
 });
 

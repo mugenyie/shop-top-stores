@@ -1,71 +1,71 @@
 //import liraries
 import React, { Component } from 'react';
-import {StyleSheet, View, Dimensions, Platform} from 'react-native';
+import {StyleSheet, View, Dimensions, Platform, ScrollView} from 'react-native';
 import StoresList from '../../components/StoresList';
 import Icon from 'react-native-vector-icons/Feather';
 import {Button, Text, Container} from 'native-base';
 import mainStyles from '../../shared/mainStyles';
+import Shimmer from '../../shared/Shimmer';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const retailStores = [
-    {
-        "id":3,
-        "name":"Amazon",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/04222452/amazon.png",
-        "url": "https://www.amazon.com"
-    },
-    {
-        "id":5,
-        "name":"Walmart",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/08/15151714/walmart.jpg",
-        "url": "https://www.walmart.com"
-    },
-    {
-        "id":4,
-        "name":"accessorize",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/27103310/accesorize.png",
-        "url": "https://www.accessorize.com/uk/"
-    },
-    {
-        "id":6,
-        "name":"Apple",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/04113300/apple.png",
-        "url": "https://www.apple.com"
-    },
-    {
-        "id":2,
-        "name":"GAP",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/20184251/gap.png",
-        "url": "https://www.gap.com"
-    },
-    {
-        "id":1,
-        "name":"FashionNova",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/13035540/fashionnova.png",
-        "url": "https://www.fashionnova.com"
-    },
-    {
-        "id":7,
-        "name":"Victorias Secret",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/13144942/victorias.png",
-        "url": "https://www.victoriassecret.com"
-    },
-    {
-        "id":8,
-        "name":"FOREVER 21",
-        "logo": "https://shoptopstores.s3.eu-west-2.amazonaws.com/wp-content/uploads/2020/09/13142952/forever21.png",
-        "url": "https://www.forever21.com/us/shop"
-    }
-]
-// create a component
 class StoresBrowserScreen extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            category_list : []
+        };
+    }
+
+    componentDidMount() {
+        fetch('https://shoptopstores.com/APP_DATA/category_list.json')
+        .then(res => {
+            console.log(res);
+            return res.json();
+        })
+        .then(responseJson => {
+            this.setState({category_list:responseJson})
+        })
+        .catch(exp => console.log(exp))
+    }
+
+    renderStores = (visible) => {
+        if(visible){
+            return(
+                this.state.category_list.map(c => 
+                    <View key={c.id} style={styles.categoryContainer}>
+                        <Text style={[mainStyles.ButtonTitle,styles.categoryTitle]}>{c.name}</Text>
+                        <StoresList {...this.props} data={c.stores} />
+                    </View>
+                )
+            )
+        }else{
+            return(
+                [1,2,3,4].map(x => 
+                    <View key={x}>
+                        <Shimmer style={{margin:10}} autoRun={true} visible={false}>
+                            <View />
+                        </Shimmer>
+                        <View style={{flexDirection:'row'}}>
+                        {
+                            [1,2,3].map(r => 
+                                <Shimmer key={r} style={{width:width*0.5,height:140,margin:10}} autoRun={true} visible={false}>
+                                    <View />
+                                </Shimmer>)
+                        }
+                        </View>
+                    </View>)
+            )
+        }
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <StoresList {...this.props} data={retailStores} />
-            </View>
+            <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+                {this.renderStores(this.state.category_list.length > 0)}
+            </ScrollView>
         );
     }
 }
@@ -73,11 +73,22 @@ class StoresBrowserScreen extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex:1, 
-        justifyContent:'center',
-        alignItems:'center',
-        paddingTop: height*0.02
+        paddingTop: height*0.05,
+        backgroundColor:"#FFFFFF"
     },
+    categoryTitle: {
+        marginLeft:10,
+        borderWidth:1,
+        borderColor:"#ccc",
+        padding:8,
+        width:200,
+        borderRadius:8
+    },
+    categoryContainer: {
+        marginBottom:32,
+        borderBottomColor:"#ccc",
+        borderBottomWidth:1
+    }
 });
 
 export default StoresBrowserScreen;
