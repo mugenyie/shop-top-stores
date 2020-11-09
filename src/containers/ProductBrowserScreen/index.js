@@ -135,7 +135,7 @@ var styles = StyleSheet.create({
   buttoAddToCart : {
     position:'absolute',
     zIndex:10,
-    bottom:4,
+    bottom:Platform.OS == "android"? 4 : 25,
     alignSelf:'center',
     alignContent:'center',
     alignItems:'center',
