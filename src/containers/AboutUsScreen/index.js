@@ -21,11 +21,10 @@ class AboutUsScreen extends Component {
                 <View style={styles.spaceBar} />
                 <Text style={[mainStyles.Header]}>How To Use the App</Text>
                 <Text style={[mainStyles.TextRegular,styles.bodyText,{paddingBottom:100}]}>
-                    <Text style={{fontWeight:'bold'}}>0.</Text> First save your user profile {"&"} shipping information by clicking "User profile {"&"} shipping"{"\n"}
-                    <Text style={{fontWeight:'bold'}}>1.</Text> Click our recommended stores to browse products or use our in-app browser to search for your preffered store or to submit a link to your product.{"\n"}
-                    <Text style={{fontWeight:'bold'}}>2.</Text> Once you have identified your item, click "ADD TO CART" red at the bottom of the screen.{"\n"}
+                    <Text style={{fontWeight:'bold'}}>1.</Text> Click our recommended stores to browse products or use our in-app browser to search for your preffered store or to submit a link of your product.{"\n"}
+                    <Text style={{fontWeight:'bold'}}>2.</Text> Once you have identified your item, click "ADD TO CART" red button on the screen.{"\n"}
                     <Text style={{fontWeight:'bold'}}>3.</Text> You can continue shopping to add more items or checkout for your items to be processed and shipping costs calculated{"\n"}
-                    <Text style={{fontWeight:'bold'}}>4.</Text> You can view orders to check order status of your items{"\n"}
+                    <Text style={{fontWeight:'bold'}}>4.</Text> You can view orders to check the order status of your items{"\n"}
                     <Text style={{fontWeight:'bold'}}>5.</Text> Once your order has finished processing, it will be in a status "pending_payment" which you can then go a head to make the payment in-app using card or mobile money{"\n"}
                     <Text style={{fontWeight:'bold'}}>6.</Text> You will be notified of all order status changes via the app.
                 </Text>

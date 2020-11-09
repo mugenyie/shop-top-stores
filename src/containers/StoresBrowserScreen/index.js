@@ -15,6 +15,8 @@ class StoresBrowserScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            IOS_APP_VERSION: 100,
+            ANDROID_APP_VERSION: 100,
             category_list : []
         };
     }
@@ -26,7 +28,12 @@ class StoresBrowserScreen extends Component {
             return res.json();
         })
         .then(responseJson => {
-            this.setState({category_list:responseJson})
+            console.log(JSON.stringify(responseJson.STORES));
+            this.setState({
+                category_list:responseJson.STORES, 
+                IOS_APP_VERSION:responseJson.IOS_APP_VERSION, 
+                ANDROID_APP_VERSION:responseJson.ANDROID_APP_VERSION
+            })
         })
         .catch(exp => console.log(exp))
     }
