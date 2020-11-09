@@ -349,7 +349,7 @@ function CustomDrawerContent(props) {
         <ShareButton />
       </View>
       <View style={{paddingLeft:20}}>
-        <Text style={[mainStyles.TextRegular]}>V 1.3.6</Text>
+        <Text style={[mainStyles.TextRegular]}>V 1.4.0</Text>
       </View>
     </View>
   );
@@ -477,7 +477,7 @@ export default function App() {
     <Provider store={store}>
       <StatusBar hidden={false} barStyle="light-content" backgroundColor="#050505" />
       <NavigationContainer>
-        <LaunchStack />
+        <DrawerNavigator />
       </NavigationContainer>
     </Provider>
   );
